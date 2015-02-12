@@ -1,33 +1,29 @@
 from OpenGL.GL import *
-import OpenGL.GL as gl
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import random
 c1=0.0
 c2=0.0
 c3=0.0
-
 rotate_y=0; 
 rotate_x=0;
-
-
 def main():
 	global window
 	
 	glutInit(sys.argv)
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
+	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
 	glutInitWindowSize(500,500)
 	glutInitWindowPosition(200,200)
 	
 	window = glutCreateWindow('Test')
-	glEnable(GL_DEPTH_TEST);
+	
 	global c1
 	global c2
 	global c3
 	
 	c1=0.0
-	c2=0.69
-	c3=0.96
+	c2=0.0
+	c3=0.0
 	
 	glutDisplayFunc(mostrarEscena)
 	glutIdleFunc(mostrarEscena)
@@ -38,6 +34,7 @@ def main():
 	glutMainLoop()
 	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
 	print matrix
+	
 def InitGL(Width, Height):
 	glClearColor(0.53,0.53,0.53,0.0)
 	glMatrixMode(GL_PROJECTION)
@@ -46,69 +43,32 @@ def mostrarEscena():
 	
 	global rotate_x
 	global rotate_y
-	
+
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 	glLoadIdentity();
-	
 	glRotatef( rotate_x, 1.0, 0.0, 0.0 );
 	glRotatef( rotate_y, 0.0, 1.0, 0.0 );
-	
-	glBegin(GL_POLYGON);
- 
+
+
+	glBegin(GL_QUADS)
 	glColor3f( c1, c2, c3 );     
-	glVertex3f(  0.25, -0.25, -0.25 );      
-	#glColor3f( 0.0, 1.0, 0.0 );     
-	glVertex3f(  0.25,  0.25, -0.25 );      
-	#glColor3f( 0.0, 0.0, 1.0 );     
-	glVertex3f( -0.25,  0.25, -0.25 );      
-	#glColor3f( 1.0, 0.0, 1.0 );     
-	glVertex3f( -0.25, -0.25, -0.25 );      
- 
-	glEnd();
-
-	glBegin(GL_POLYGON);
-	glColor3f(   c1,  c2, c3 );
-	glVertex3f(  0.25, -0.25, 0.25 );
-	glVertex3f(  0.25,  0.25, 0.25 );
-	glVertex3f( -0.25,  0.25, 0.25 );
-	glVertex3f( -0.25, -0.25, 0.25 );
-	glEnd();
-	 
-
-	glBegin(GL_POLYGON);
-	glColor3f(  c1,  c2,  c3 );
-	glVertex3f( 0.25, -0.25, -0.25 );
-	glVertex3f( 0.25,  0.25, -0.25 );
-	glVertex3f( 0.25,  0.25,  0.25 );
-	glVertex3f( 0.25, -0.25,  0.25 );
-	glEnd();
-	 
-	
-	glBegin(GL_POLYGON);
-	glColor3f(   c1,  c2,  c3 );
-	glVertex3f( -0.25, -0.25,  0.25 );
-	glVertex3f( -0.25,  0.25,  0.25 );
-	glVertex3f( -0.25,  0.25, -0.25 );
-	glVertex3f( -0.25, -0.25, -0.25 );
-	glEnd();
-	 
-	
-	glBegin(GL_POLYGON);
-	glColor3f(   c1,  c2, c3 );
-	glVertex3f(  0.25,  0.25,  0.25 );
-	glVertex3f(  0.25,  0.25, -0.25 );
-	glVertex3f( -0.25,  0.25, -0.25 );
-	glVertex3f( -0.25,  0.25,  0.25 );
-	glEnd();
-
-	glBegin(GL_POLYGON);
-	glColor3f(   c1, c2,  c3 );
 	glVertex3f(  0.25, -0.25, -0.25 );
 	glVertex3f(  0.25, -0.25,  0.25 );
 	glVertex3f( -0.25, -0.25,  0.25 );
 	glVertex3f( -0.25, -0.25, -0.25 );
 	glEnd()
-	glFlush()
+	'''glVertex3f(  -0.25, -0.25, -0.25 );          
+	glVertex3f(  0.25,  -0.25, -0.25 );         
+	glVertex3f( 0.25,  0.25, 0.25 );          
+	glVertex3f( -0.25, 0.25,0.25 );     
+	glEnd()'''
+	'''glBegin(GL_TRIANGLES)
+	glColor3f(c1,c2,c3)
+	glVertex2f(0.25,0)
+	glVertex2f(-0.25,0)
+	glVertex2f(0,0.5)
+	glEnd()'''
+	
 	glutSwapBuffers();
 
 
@@ -123,20 +83,20 @@ def keyPressed(*args):
 		c2=0.0
 		c3=0.0
 		mostrarEscena()
-	elif key=="g" or key=="G":
+	if key=="g" or key=="G":
 		
 		c1=0.0
 		c2=1.0
 		c3=0.0
 		mostrarEscena()
-	elif key=="b" or key=="B":
+	if key=="b" or key=="B":
 		
 		c1=0.0
 		c2=0.0
 		c3=1.0
 		mostrarEscena()
 	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-	print matrix
+	print matrix	
 def mouseClicked(*args):
 	key = args[0];
 	global c1
@@ -149,8 +109,7 @@ def mouseClicked(*args):
 		mostrarEscena()
 	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
 	print matrix
-
-		
+	
 def specialKeys( *args):
 	key = args[0]
 	global rotate_x
@@ -169,12 +128,6 @@ def specialKeys( *args):
 	elif (key == GLUT_KEY_DOWN):
 		rotate_x -= 5;
 
- 
-  
-	#glutPostRedisplay();
- 
-		
-		
-		
+
 if __name__=="__main__":
 	main()
