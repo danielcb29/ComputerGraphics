@@ -1,3 +1,3 @@
 # ComputerGraphics
 
-This folder contains examples of class and exercises
+This folder contains examples and excersises of class 
