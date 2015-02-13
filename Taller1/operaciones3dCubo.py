@@ -52,6 +52,7 @@ def mostrarEscena():
 	
 	glRotatef( rotate_x, 1.0, 0.0, 0.0 );
 	glRotatef( rotate_y, 0.0, 1.0, 0.0 );
+	glRotatef(30,0,0,1) #Rotacion 2.6
 	
 	glBegin(GL_POLYGON);
  
