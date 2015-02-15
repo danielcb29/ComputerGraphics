@@ -43,9 +43,9 @@ def DrawGLScene():
         glLoadIdentity()
         glTranslatef(0.0,0.0,-6.0)
  
-        #glRotatef(X_AXIS,1.0,0.0,0.0)
-        #glRotatef(Y_AXIS,0.0,1.0,0.0)
-        #glRotatef(Z_AXIS,0.0,0.0,1.0)
+        glRotatef(X_AXIS,1.0,0.0,0.0)
+        glRotatef(Y_AXIS,0.0,1.0,0.0)
+        glRotatef(Z_AXIS,0.0,0.0,1.0)
  
         # Draw Cube (multiple quads)
         glBegin(GL_QUADS)

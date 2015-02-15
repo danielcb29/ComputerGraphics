@@ -5,8 +5,8 @@ import random
 c1=0.839  
 c2=0.474
 c3=0.019
-rotate_y=0; 
-rotate_x=0;
+rotate_y=-105; 
+rotate_x=15;
 def main():
 	global window
 	
@@ -16,14 +16,7 @@ def main():
 	glutInitWindowPosition(200,200)
 	
 	window = glutCreateWindow('Test')
-	
-	'''global c1
-	global c2
-	global c3
-	
-	c1=0.0
-	c2=0.0
-	c3=0.0'''
+
 	
 	glutDisplayFunc(mostrarEscena)
 	glutIdleFunc(mostrarEscena)
@@ -149,6 +142,9 @@ def specialKeys( *args):
  
 	elif (key == GLUT_KEY_DOWN):
 		rotate_x -= 5;
+
+	print "X: "+str(rotate_x)
+	print "Y: "+str(rotate_y)
 
 
 if __name__=="__main__":

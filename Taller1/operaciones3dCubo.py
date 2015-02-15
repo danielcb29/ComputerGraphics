@@ -7,8 +7,8 @@ c1=0.0
 c2=0.0
 c3=0.0
 
-rotate_y=0; 
-rotate_x=0;
+rotate_y=-35; 
+rotate_x=5;
 
 
 def main():
@@ -36,8 +36,7 @@ def main():
 	glutSpecialFunc(specialKeys);
 	InitGL(500,500)
 	glutMainLoop()
-	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-	print matrix
+
 def InitGL(Width, Height):
 	glClearColor(0.53,0.53,0.53,0.0)
 	glMatrixMode(GL_PROJECTION)
@@ -148,8 +147,8 @@ def mouseClicked(*args):
 		c2= random.random()
 		c3= random.random()
 		mostrarEscena()
-	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-	print matrix
+	
+
 
 		
 def specialKeys( *args):
@@ -169,6 +168,9 @@ def specialKeys( *args):
  
 	elif (key == GLUT_KEY_DOWN):
 		rotate_x -= 5;
+
+	print "X: "+str(rotate_x)
+	print "Y: "+str(rotate_y)
 
  
   
