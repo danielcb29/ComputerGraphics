@@ -1,3 +1,4 @@
+#Taller 1 Daniel Correa 1225622
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
