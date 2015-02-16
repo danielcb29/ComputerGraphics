@@ -1,4 +1,4 @@
-#Taller 1 Daniel Correa 1225622
+#Practica 1 Daniel Correa 1225622
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *

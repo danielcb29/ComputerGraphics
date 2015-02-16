@@ -1,4 +1,4 @@
-#Taller 1 Daniel Correa 1225622
+#Practica 1 Daniel Correa 1225622
 from OpenGL.GL import *
 import OpenGL.GL as gl
 from OpenGL.GLUT import *
@@ -136,8 +136,7 @@ def keyPressed(*args):
 		c2=0.0
 		c3=1.0
 		mostrarEscena()
-	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-	print matrix
+
 def mouseClicked(*args):
 	key = args[0];
 	global c1
@@ -170,13 +169,6 @@ def specialKeys( *args):
 	elif (key == GLUT_KEY_DOWN):
 		rotate_x -= 5;
 
-	print "X: "+str(rotate_x)
-	print "Y: "+str(rotate_y)
-
- 
-  
-	#glutPostRedisplay();
- 
 		
 		
 		

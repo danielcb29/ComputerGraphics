@@ -1,11 +1,21 @@
-#Taller 1 Daniel Correa 1225622
+#Practica 1 Daniel Correa 1225622
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-#import math
 import Image
-#import numpy
 
+def main():
+
+	global window	
+	glutInit(sys.argv)
+	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
+	glutInitWindowSize(500,500)	
+	glutInitWindowPosition(200,200)
+	window = glutCreateWindow('Test')
+	glutDisplayFunc(mostrarEscena)	
+	glutIdleFunc(mostrarEscena)	
+	InitGL(500, 500)
+	glutMainLoop()
 
 def InitGL(Width, Height): 
 	glClearColor(0.53, 0.53, 0.53, 0.0) 
@@ -53,23 +63,6 @@ def mostrarEscena():
 	glEnd()
 
 	glutSwapBuffers()
-
-
-
-
-def main():
-
-	global window	
-	glutInit(sys.argv)
-	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB)
-	glutInitWindowSize(500,500)	
-	glutInitWindowPosition(200,200)
-	window = glutCreateWindow('Punto4.1')
-	glutDisplayFunc(mostrarEscena)	
-	glutIdleFunc(mostrarEscena)	
-	InitGL(500, 500)
-	glutMainLoop()
-	
 
 if __name__ == "__main__":
 	main() 

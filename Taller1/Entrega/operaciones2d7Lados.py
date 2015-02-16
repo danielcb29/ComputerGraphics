@@ -1,12 +1,10 @@
-#Taller 1 Daniel Correa 1225622
+#Practica 1 Daniel Correa 1225622
 from OpenGL.GL import *
-import OpenGL.GL as gl
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+from math import *
 import random
-c1=0.0
-c2=0.0
-c3=0.0
+square = glBegin(GL_QUADS)
 def main():
 	global window
 	
@@ -30,9 +28,11 @@ def main():
 	glutKeyboardFunc(keyPressed)
 	glutMouseFunc(mouseClicked);
 	InitGL(500,500)
+	
 	glutMainLoop()
 	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
 	print matrix
+	
 def InitGL(Width, Height):
 	glClearColor(0.53,0.53,0.53,0.0)
 	glMatrixMode(GL_PROJECTION)
@@ -41,16 +41,22 @@ def mostrarEscena():
 	
 	glClear(GL_COLOR_BUFFER_BIT)
 	
-	glBegin(GL_QUADS)
+	glBegin(GL_POLYGON)
 	glColor3f(c1,c2,c3)
-	glVertex2f(0.25,0.25)
-	glVertex2f(0.25,-0.25)
-	glVertex2f(-0.25,-0.25)
-	glVertex2f(-0.25,0.25)
+	
+	posx, posy = 0,0    
+	sides = 8    
+	radius = 0.5    
+	#glBegin(GL_POLYGON)    
+	for i in range(7):    
+		cosine= radius * cos(i*2*pi/sides) + posx    
+		sine  = radius * sin(i*2*pi/sides) + posy    
+		glVertex2f(cosine,sine)
+	
 	glEnd()
 	
 	glutSwapBuffers();
-
+	
 
 def keyPressed(*args):
 	key = args[0];
@@ -88,12 +94,6 @@ def mouseClicked(*args):
 		c3= random.random()
 		mostrarEscena()
 	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-	print matrix
-
-		
-		
-		
-		
+	print matrix	
 if __name__=="__main__":
 	main()
-
