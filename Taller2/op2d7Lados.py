@@ -48,7 +48,7 @@ def mostrarEscena():
 	posx, posy = 0,0    
 	sides = 8    
 	radius = 0.5    
-	#glBegin(GL_POLYGON)    
+
 	for i in range(7):    
 		cosine= radius * cos(i*2*pi/sides) + posx    
 		sine  = radius * sin(i*2*pi/sides) + posy    

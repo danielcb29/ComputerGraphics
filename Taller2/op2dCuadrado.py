@@ -73,11 +73,11 @@ def keyPressed(*args):
 		glMultMatrixd(translateMatrix)
 		translateCount2+=1
 		print "With multMatrix :)"
-	elif key=="S" or "s": 
+	elif key=="S" or key=="s": 
 		shMatrix=(1,0,0,0,0.3,1,0,0,0,0,1,0,0,0,0,1)
 		glMultMatrixd(shMatrix)
 		print "With multMatrix :)"
-	elif key=="f" or "F":
+	elif key=="f" or key=="F":
 		refMatrix=(1,0,0,0,0,1,0,0,0,0,-1,0,0,0,0,1)
 		glMultMatrixd(refMatrix)
 		print "With multMatrix :)"

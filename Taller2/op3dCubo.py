@@ -9,9 +9,6 @@ c1=0.0
 c2=0.0
 c3=0.0
 
-rotate_y=-35; 
-rotate_x=5;
-
 
 def main():
 	global window
@@ -35,7 +32,7 @@ def main():
 	glutIdleFunc(mostrarEscena)
 	glutKeyboardFunc(keyPressed)
 	glutMouseFunc(mouseClicked);
-	#glutSpecialFunc(specialKeys);
+
 	InitGL(500,500)
 	glutMainLoop()
 
@@ -45,8 +42,7 @@ def InitGL(Width, Height):
 	
 def mostrarEscena():
 	
-	global rotate_x
-	global rotate_y
+
 	
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
@@ -55,11 +51,11 @@ def mostrarEscena():
  
 	glColor3f( c1, c2, c3 );     
 	glVertex3f(  0.25, -0.25, -0.25 );      
-	#glColor3f( 0.0, 1.0, 0.0 );     
+    
 	glVertex3f(  0.25,  0.25, -0.25 );      
-	#glColor3f( 0.0, 0.0, 1.0 );     
+    
 	glVertex3f( -0.25,  0.25, -0.25 );      
-	#glColor3f( 1.0, 0.0, 1.0 );     
+   
 	glVertex3f( -0.25, -0.25, -0.25 );      
  
 	glEnd();
@@ -122,8 +118,14 @@ def keyPressed(*args):
 		rotationMatrix = (1,0,0,0,0,cos(30*(180/pi)),sin(30*(180/pi)),0,0,-sin(30*(180/pi)),cos(30*(180/pi)),0,0,0,0,1)
 		glMultMatrixd(rotationMatrix)
 		print "With multMatrix :) rot"
-	elif key == "S" or "s":
-		glRotatef(30,1,3,5)
+	elif key == "S" or key=="s":
+		glRotatef(35,1,3,5)
+	elif key=="b" or key=="B":
+		glRotatef(30,0,0,1)
+		print "de rotacion a translacion"
+		glTranslatef(0.0,0.1,0.0)
+		print "de translacion a escalacion"
+		glScalef(1.0,0.95,1.0)
 	
 
 def mouseClicked(*args):
@@ -136,30 +138,7 @@ def mouseClicked(*args):
 		c2= random.random()
 		c3= random.random()
 		mostrarEscena()
-	
 
-
-		
-'''def specialKeys( *args):
-	key = args[0]
-	global rotate_x
-	global rotate_y
-
-	if (key == GLUT_KEY_RIGHT):
-		rotate_y += 5;
-
-	elif (key == GLUT_KEY_LEFT):
-		rotate_y -= 5;
-
-	elif (key == GLUT_KEY_UP):
-		rotate_x += 5;
-
- 
-	elif (key == GLUT_KEY_DOWN):
-		rotate_x -= 5;'''
-
-		
-		
 		
 if __name__=="__main__":
 	main()
