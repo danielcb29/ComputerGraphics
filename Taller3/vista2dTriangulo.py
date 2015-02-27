@@ -1,4 +1,5 @@
-#Practica 1 Daniel Correa 1225622
+#Practica 3 Daniel Correa 1225622
+#NOTA: PARA IMPRIMIR LAS MATRICES UNDIR TECLA M
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
@@ -6,6 +7,7 @@ import random
 c1=0.0
 c2=0.0
 c3=0.0
+mpmatrix = 0;
 def main():
 	global window
 	
@@ -39,6 +41,8 @@ def InitGL(Width, Height):
 	
 def mostrarEscena():
 	
+	global mpmatrix
+
 	glClear(GL_COLOR_BUFFER_BIT)
 	
 	glBegin(GL_TRIANGLES)
@@ -48,7 +52,7 @@ def mostrarEscena():
 	glVertex2f(-5,0)
 	glVertex2f(0,15)
 	glEnd()
-	glViewport(50, 50, 100, 100);
+	mpmatrix = glViewport(50, 50, 100, 100);
 	glutSwapBuffers();
 
 
@@ -69,14 +73,17 @@ def keyPressed(*args):
 		c2=1.0
 		c3=0.0
 		mostrarEscena()
-	if key=="b" or key=="B":
+	elif key=="b" or key=="B":
 		
 		c1=0.0
 		c2=0.0
 		c3=1.0
 		mostrarEscena()
-	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-	print matrix	
+	elif key=="m" or key=="M":
+		print "Matriz de Modelado",matrixModel
+		print "Matriz de Proyeccion",matrixProjection
+		print "Matriz de Mapeo",mpmatrix
+	
 def mouseClicked(*args):
 	key = args[0];
 	global c1
@@ -87,8 +94,7 @@ def mouseClicked(*args):
 		c2= random.random()
 		c3= random.random()
 		mostrarEscena()
-	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-	print matrix
+	
 	
 if __name__=="__main__":
 	main()

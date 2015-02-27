@@ -1,15 +1,18 @@
 #Practica 3 Daniel Correa 1225622
+#NOTA: PARA IMPRIMIR LAS MATRICES UNDIR TECLA M
 from OpenGL.GL import *
 import OpenGL.GL as gl
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import random
 from math import *
+import numpy
 c1=0.0
 c2=1.0
 c3=0.0
 translateCount=0
 translateCount2=0
+mpmatrix = 0;
 def main():
 	global window
 	
@@ -20,11 +23,12 @@ def main():
 	
 	window = glutCreateWindow('Test')
 
+	InitGL(500,500)
 	glutDisplayFunc(mostrarEscena)
 	glutIdleFunc(mostrarEscena)
 	glutKeyboardFunc(keyPressed)
 	glutMouseFunc(mouseClicked);
-	InitGL(500,500)
+	
 	glutMainLoop()
 	
 def InitGL(Width, Height):
@@ -33,6 +37,8 @@ def InitGL(Width, Height):
 	
 def mostrarEscena():
 	
+	global mpmatrix
+
 	glClear(GL_COLOR_BUFFER_BIT)
 	
 	glBegin(GL_QUADS)
@@ -42,19 +48,21 @@ def mostrarEscena():
 	glVertex2f(-15,-15)
 	glVertex2f(-15,15)
 	glEnd()
-	glViewport(150, 150, 200, 200);
-	glLoadIdentity();
-	glOrtho(0,250,0,250,1,-1);
+	mpmatrix = glViewport(150, 150, 200, 200);
 	glutSwapBuffers();
 	
-	#matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-	#print "Matriz de Modelado",matrix
+
 
 
 def keyPressed(*args):
 	key = args[0];
 	global translateCount
 	global translateCount2
+	global mpmatrix
+
+	matrixModel = glGetFloatv(GL_MODELVIEW_MATRIX)
+	matrixProjection = glGetFloatv(GL_PROJECTION_MATRIX)
+
 	if key=="r":
 		glRotatef(30,0,0,1)
 	elif key=="R":
@@ -85,8 +93,12 @@ def keyPressed(*args):
 		refMatrix=(1,0,0,0,0,1,0,0,0,0,-1,0,0,0,0,1)
 		glMultMatrixd(refMatrix)
 		print "With multMatrix :)"
-	matrix = glGetFloatv(GL_PROJECTION_MATRIX)
-	print matrix
+	elif key=="m" or key=="M":
+			
+		print "Matriz de Modelado",matrixModel
+		print "Matriz de Proyeccion",matrixProjection
+		print "Matriz de Mapeo",mpmatrix
+
 def mouseClicked(*args):
 	key = args[0];
 	global c1
@@ -97,8 +109,6 @@ def mouseClicked(*args):
 		c2= random.random()
 		c3= random.random()
 		mostrarEscena()
-	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-	print matrix
 	
 if __name__=="__main__":
 	main()
