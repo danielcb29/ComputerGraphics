@@ -1,4 +1,4 @@
-#Practica 3 Daniel Correa 1225622
+ #Practica 3 Daniel Correa 1225622
 #NOTA: PARA IMPRIMIR LAS MATRICES UNDIR TECLA M
 from OpenGL.GL import *
 from OpenGL.GLUT import *
@@ -7,7 +7,10 @@ import random
 c1=0.0
 c2=0.0
 c3=0.0
-mpmatrix = 0;
+
+matrixModel =0
+matrixProjection =0
+
 def main():
 	global window
 	
@@ -32,8 +35,8 @@ def main():
 	glutMouseFunc(mouseClicked);
 	InitGL(500,500)
 	glutMainLoop()
-	matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-	print matrix
+	#matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
+	#print matrix
 	
 def InitGL(Width, Height):
 	glClearColor(0.53,0.53,0.53,0.0)
@@ -48,11 +51,23 @@ def mostrarEscena():
 	glBegin(GL_TRIANGLES)
 	glColor3f(c1,c2,c3)
 	
-	glVertex2f(5,0)
-	glVertex2f(-5,0)
-	glVertex2f(0,15)
+	glVertex2f(0.0,0.2)
+	glVertex2f(-0.35,0)
+	glVertex2f(0.35,0)
 	glEnd()
-	mpmatrix = glViewport(50, 50, 100, 100);
+	#mpmatrix = glViewport(100, 100, 250, 250);
+	mpmatrix = glViewport(50, 50, 500, 500);
+	#mpmatrix = glViewport(250, 100, 300, 250);
+	
+	#Matrices
+	global matrixModel
+	global matrixProjection
+	
+	matrixModel = glGetFloatv(GL_MODELVIEW_MATRIX)
+	
+	matrixProjection = glGetFloatv(GL_PROJECTION_MATRIX)
+	
+	
 	glutSwapBuffers();
 
 
@@ -61,6 +76,10 @@ def keyPressed(*args):
 	global c1
 	global c2
 	global c3
+	
+	global matrixModel
+	global matrixProjection
+	
 	if key=="r" or key=="R":
 		
 		c1=1.0

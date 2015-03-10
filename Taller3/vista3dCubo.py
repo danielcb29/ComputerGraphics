@@ -98,8 +98,14 @@ def mostrarEscena():
 	glVertex3f( -0.25, -0.25,  0.25 );
 	glVertex3f( -0.25, -0.25, -0.25 );
 	glEnd()
-
-	#glOrtho(0,24,48,0,-180,-4)
+	
+	#Matriz de mapeo
+	glViewport(0,0,500,500)
+	
+	#Matriz de proyeccion
+	glMatrixMode(GL_PROJECTION)
+	glLoadIdentity()
+	glOrtho(-1,1,-1,1,1,-2)
 	#glOrtho(0,200,0,100,1,-1);
 
 	glFlush()

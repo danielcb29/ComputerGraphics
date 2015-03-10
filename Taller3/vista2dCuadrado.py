@@ -48,7 +48,9 @@ def mostrarEscena():
 	glVertex2f(-15,-15)
 	glVertex2f(-15,15)
 	glEnd()
-	mpmatrix = glViewport(150, 150, 200, 200);
+	mpmatrix = glViewport(100, 100, 250, 250);
+	#mpmatrix = glViewport(50, 50, 500, 500);
+	#mpmatrix = glViewport(250, 100, 300, 250);
 	glutSwapBuffers();
 	
 
