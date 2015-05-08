@@ -128,11 +128,14 @@ def keyPressed(*args):
 		print "de translacion a escalacion"
 		glScalef(1.0,0.95,1.0)
 	elif key=="P" or key =="p":
-		glMatrixMode(gl.GL_PROJECTION)
+		glMatrixMode(GL_PROJECTION)
 		glLoadIdentity()
-		#glOrtho(0, 0.24, 0.48, 0, -1.8, -0.4)
+		mat = (40,-18,-6,-24,-18,13,-12,-48,-6,-12,45,-16,0,0,0,1)
+		#glMultMatrixd(mat)
+		#glOrtho(0, 24, 0, 48, 4, -180)
 		#glOrtho(1, 1, 1, 1, -5, -5)
-		glFrustum(0.1,0.4,0.3,0.5,0.4,0.6)
+		#glFrustum(1,4,0,5,4,0)
+		gluLookAt(0,0,0,0,0,1,1,0,1)
 
 def mouseClicked(*args):
 	key = args[0];
