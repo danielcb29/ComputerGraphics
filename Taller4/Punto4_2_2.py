@@ -36,61 +36,12 @@ def mostrarEscena():
 	glClear(GL_COLOR_BUFFER_BIT)
 
 	glBegin(GL_POLYGON)
-	#vertices = punto_medio(0.3,False)
-	#for v in vertices:
-	#	v
-
-	glVertex2f(0,0.3)
-	glVertex2f(0,-0.3)
-	glVertex2f(0.3,0)
-	glVertex2f(-0.3,0)
-
-	glVertex2f(0.1,0.3)
-	glVertex2f(0.1,-0.3)
-	glVertex2f(-0.1,0.3)
-	glVertex2f(-0.1,-0.3)
-	glVertex2f(0.3,0.1)
-	glVertex2f(0.3,-0.1)
-	glVertex2f(-0.3,0.1)
-	glVertex2f(-0.3,-0.1)
-	
-	glVertex2f(0.2,0.2)
-	glVertex2f(0.2,-0.2)
-	glVertex2f(-0.2,0.2)
-	glVertex2f(-0.2,-0.2)
 	glColor3f(r,g,b)
-
-	glEnd()
-
-	'''#EJERCICIO 4.1 , PRIMER EJERCICIO RECTA 
-	glBegin(GL_QUADS)
-	glColor3f(r,g,b)
-	glVertex2f(0.25,0.25)
-	glVertex2f(0.25,-0.25)
-	glVertex2f(-0.25,-0.25)
-	glVertex2f(-0.25,0.25)
-	glEnd()
-	
-
-	glBegin(GL_LINES)
-	glColor3f(r,g,b)
-	p1=[-0.8,-0.71]
-	p2=[0.9,0.48]
-	vertices = punto_medio(p1,p2,False)
+	vertices = punto_medio(0.7,False)
 	for v in vertices:
 		v
-	glEnd()
-	
-	#EJERCICIO 4.1 , SEGUNDO EJERCICIO PUNTOS
-	glBegin(GL_LINES)
-	glColor3f(r,g,b)
-	p3=[-0.6,-0.75]
-	p4=[0.8,0.69]
-	vertices = punto_medio(p3,p4,False)
-	for v in vertices:
-		v
-	glEnd()'''
-	
+
+	glEnd()	
 	glutSwapBuffers()
 
 def punto_medio(r,print_pto):
