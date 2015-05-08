@@ -4,11 +4,8 @@ from OpenGL.GLU import *
 from math import * 
 import random
 
-global r
 r=0
-global g
 g=1
-global b
 b=0
 
 transCounter = 0
@@ -20,46 +17,47 @@ def main():
 	glutInitWindowSize(500,500)
 	glutInitWindowPosition(200,200)
 	
-	window = glutCreateWindow('Taller 4')
-	
+	window = glutCreateWindow('Taller 4-4.1')
+
 	glutDisplayFunc(mostrarEscena)
 	glutIdleFunc(mostrarEscena)
 	glutKeyboardFunc(keyPressed)
-	glutMouseFunc(clickPressed)
+	glutMouseFunc(mouseClicked)
 	InitGL(500,500)
-	
-	matriz = glGetFloatv(GL_PROJECTION_MATRIX)
-	
 	glutMainLoop()
-	
+	glGetFloatv(GL_MODELVIEW_MATRIX)
 	
 def InitGL(Width, Height):
 	glClearColor(0.529, 0.529, 0.529,0.529)
+	glMatrixMode(GL_PROJECTION)
 	
 def mostrarEscena():
 	glClear(GL_COLOR_BUFFER_BIT)
 	
-	glLoadIdentity()
-
-	glBegin(GL_QUADS)
-	
-	
-	
+	#EJERCICIO 4.1 , PRIMER EJERCICIO RECTA 
+	glBegin(GL_LINES)
 	glColor3f(r,g,b)
-	glVertex2f( 15, 15)
-	glVertex2f( 15, -15)
-	glVertex2f( -15, -15)
-	glVertex2f( -15, 15)
- 
+	p1=[-0.8,-0.71]
+	p2=[0.9,0.48]
+	vertices = punto_medio(p1,p2,False)
+	for v in vertices:
+		v
 	glEnd()
 	
-	glViewport(150, 150, 200, 200)
-	
-	glMatrixMode(GL_PROJECTION)
+	#EJERCICIO 4.1 , SEGUNDO EJERCICIO PUNTOS
+	glBegin(GL_LINES)
+	glColor3f(r,g,b)
+	p3=[-0.6,-0.75]
+	p4=[0.8,0.69]
+	vertices = punto_medio(p3,p4,False)
+	for v in vertices:
+		v
+	glEnd()
 	
 	glutSwapBuffers()
 
-def punto_medio(pto1, pto2):
+def punto_medio(pto1, pto2,print_line):
+	vertices = []
 	x0 = pto1[0]
 	y0 = pto1[1]
 	x1 = pto2[0]
@@ -71,7 +69,9 @@ def punto_medio(pto1, pto2):
 	increNE = 2 * (dy-dx)
 	x = x0
 	y = y0
-	print 'Dibuja: (' + str(x) + ',' + str(y) + ')'
+	if print_line:
+		print 'Dibuja: (' + str(x) + ',' + str(y) + ')'
+	vertices.append(glVertex2f(x,y))
 	while x < x1:
 		if d <= 0:
 			d+=incrE
@@ -80,7 +80,10 @@ def punto_medio(pto1, pto2):
 			d+=increNE
 			x+=1
 			y+=1
-		print 'Dibuja: (' + str(x) + ',' + str(y) + ')'
+		if print_line:
+			print 'Dibuja: (' + str(x) + ',' + str(y) + ')'
+		vertices.append(glVertex2f(x,y))
+	return vertices
 	
 def keyPressed(*args):
 	key = args[0]
@@ -90,24 +93,22 @@ def keyPressed(*args):
 		p1 = [-4,-6]
 		p2 = [9,6]
 		print 'ALGORIMO PUNTO MEDIO PARA: ('  + str(p1[0]) + ',' + str(p1[1]) + ') hasta (' + str(p2[0]) + ',' + str(p2[1]) + ')'
-		punto_medio(p1,p2)
+		punto_medio(p1,p2,True)
 	if key == 'P':
 		p1 = [-9,2]
 		p2 = [8,6]
 		print 'ALGORIMO PUNTO MEDIO PARA: ('  + str(p1[0]) + ',' + str(p1[1]) + ') hasta (' + str(p2[0]) + ',' + str(p2[1]) + ')'
-		punto_medio(p1,p2)
+		punto_medio(p1,p2,True)
 
-
-		
-def clickPressed(*args):
-	button = args[0]
+def mouseClicked(*args):
+	key = args[0];
 	global r
 	global g
 	global b
-	if (button == GLUT_LEFT_BUTTON):
-		r=random.random()
-		g=random.random()
-		b=random.random()
+	if key == GLUT_LEFT_BUTTON:
+		r= random.random()
+		g= random.random()
+		b= random.random()
 		mostrarEscena()
 main()
 
