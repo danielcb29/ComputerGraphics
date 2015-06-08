@@ -68,7 +68,7 @@ def mostrarEscena():
 	
 	glColor3f(0, 1, 1)
 	cosine=radius*cos(4*2*pi/sides)+posx
-	sine=radius*sin(5*2*pi/sides)+posy
+	sine=radius*sin(4*2*pi/sides)+posy
 	glVertex2f(cosine,sine)
 	
 	glColor3f(1, 1, 0)
