@@ -1,0 +1,78 @@
+
+origin := new Node (1, makeTree(3, 100, 100, False), 100, 100, 0, "max")
+
+function makeTree(depth, IALife, PLife, flagMaximizing)
+	children := []
+	if IALife <= 0
+		return -∞
+	if PLife <= 0
+		return +∞
+	if depth = 0 
+		return Null
+	if flagMaximizing
+		type := "max"
+		childrenOne := [] # children first bolita
+		childrenTwo := [] # children second bolita
+		childrenOne.append(new Node(prob1[0], makeTree(depth-1, IALife, PLife-hit1[0], not flagMaximizing), IALife, PLife-hit1[0], hit1[0],type))
+		childrenOne.append(new Node(prob2[0], makeTree(depth-1, IALife, PLife-hit2[0], not flagMaximizing), IALife, PLife-hit2[0], hit2[0],type))
+		childrenOne.append(new Node(prob3[0], makeTree(depth-1, IALife, PLife-hit3[0], not flagMaximizing), IALife, PLife-hit3[0], hit3[0],type))
+		bolitaOne := new Node(1, childrenOne, IALife, PLife, hit, "bolita")
+		childrenTwo.append(new Node(prob1[1], makeTree(depth-1, IALife, PLife-hit1[1], not flagMaximizing), IALife, PLife-hit1[1], hit1[1],type))
+		childrenTwo.append(new Node(prob2[1], makeTree(depth-1, IALife, PLife-hit2[1], not flagMaximizing), IALife, PLife-hit2[1], hit2[1],type))
+		childrenTwo.append(new Node(prob3[1], makeTree(depth-1, IALife, PLife-hit3[1], not flagMaximizing), IALife, PLife-hit3[1], hit3[1],type))
+		bolitaTwo := new Node(1, childrenTwo, IALife, PLife, hit, "bolita")
+	else 
+		type := "min"
+		childrenOne :=[] children first bolita
+		childrenTwo := [] # children second bolita
+		childrenOne.append(new Node(prob1[0], makeTree(depth, IALife-hit1[0], PLife, not flagMaximizing), IALife-hit1[0], PLife, hit1[0],type))
+		childrenOne.append(new Node(prob2[0], makeTree(depth, IALife-hit2[0], PLife, not flagMaximizing), IALife-hit2[0], PLife, hit2[0],type))
+		childrenOne.append(new Node(prob3[0], makeTree(depth, IALife-hit3[0], PLife, not flagMaximizing), IALife-hit3[0], PLife, hit3[0],type))
+		bolitaOne := new Node(1, childrenOne, IALife, PLife, hit, "bolita")
+		childrenTwo.append(new Node(prob1[1], makeTree(depth-1, IALife, PLife-hit1[1], not flagMaximizing), IALife, PLife-hit1[1], hit1[1],type))
+		childrenTwo.append(new Node(prob2[1], makeTree(depth-1, IALife, PLife-hit2[1], not flagMaximizing), IALife, PLife-hit2[1], hit2[1],type))
+		childrenTwo.append(new Node(prob3[1], makeTree(depth-1, IALife, PLife-hit3[1], not flagMaximizing), IALife, PLife-hit3[1], hit3[1],type))
+		bolitaTwo := new Node(1, childrenTwo, IALife, PLife, hit, "bolita")
+	return [bolitaOne, bolitaTwo]
+
+class Node
+	int probability := 1
+	Node children[]
+	int IALife := 100
+	int PLife := 100
+	int hit  := 0
+	String type := "max"
+
+function heuristic(node)
+	if node.IALife <= 0
+		return -∞
+	elif node.PLife <= 0
+		return +∞
+	else
+		DamageMade := 100-node.PLife
+		DamageGotten := 100-node.IALife
+		return DamageMade - DamageGotten
+
+#para nuestro caso, la bolita aparece hijo de por medio
+function minimax(node, depth)
+    if depth = 0 or node is a terminal node
+        return the heuristic value of node
+	if node.type = bolita
+			sum := 0
+			for each child of node
+				sum+= minimax(child, depth)*child.probability
+			return sum
+	elif node.type = max
+	    bestValue := -∞
+	    for each child of node
+	        val := minimax(child, depth - 1)
+	        bestValue := max(bestValue, val)
+	    return bestValue
+	elif node.type = min
+	    bestValue := +∞
+	    for each child of node
+	        val := minimax(child, depth - 1)
+	        bestValue := min(bestValue, val)
+	    return bestValue
+
+minimax(origin, depth, TRUE)
